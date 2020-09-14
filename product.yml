@@ -1,3 +1,63 @@
-schema-version: 1.0
 name: tomcat
 
+products:
+  - name: aws-jdk
+    alias: jdk
+    model:
+      version: "{% jdk %}"
+
+ports:
+  - "{% httpPort %}"
+
+persistent-dirs:
+  - name: webapps
+    intern: "{% catalinaHome %}/webapps"
+    extern: "."
+    owner: "{% user %}"
+
+
+const:
+  product: apache-tomcat-{% major %}.{% minor %}.{% patch %}
+  catalinaHome: "{% installDir %}/{% product %}"
+
+var:
+  major: "8"
+  minor: "5"
+  patch: "53"
+  httpPort: "8080"
+  user: default
+  jdk: "8"
+
+user: "{% user %}"
+
+provision:
+  - url: http://archive.apache.org/dist/tomcat/tomcat-{% major %}/v{% major %}.{% minor %}.{% patch %}/bin/{% product %}.tar.gz
+  - env: CATALINA_HOME={% catalinaHome %}
+  - env: CATALINA_OPTS=
+  - systempath: "{% catalinaHome %}/bin"
+  - permission:
+      paths: "{% catalinaHome %}"
+      owner: "{% user %}"
+      recursive: true
+
+deploy:
+  inputs:
+    - webapps
+  actions:
+    - copy:
+        input: webapps
+        topath: "{% catalinaHome %}/webapps"
+
+up: start-tomcat
+ 
+down: stop-tomcat
+
+command:
+  start-tomcat:
+    async: true
+    inline: catalina.sh run
+  stop-tomcat:
+    container:
+      create: false
+    inline: catalina.sh stop
+   
