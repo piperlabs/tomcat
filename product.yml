@@ -11,7 +11,7 @@ ports:
 
 persistent-dirs:
   - name: webapps
-    intern: "{% catalinaHome %}/webapps"
+    intern: "{% webapps %}"
     extern: "."
     owner: "{% user %}"
 
@@ -19,6 +19,7 @@ persistent-dirs:
 const:
   product: apache-tomcat-{% major %}.{% minor %}.{% patch %}
   catalinaHome: "{% installDir %}/{% product %}"
+  webapps: "{% catalinaHome %}/webapps"
 
 var:
   major: "8"
