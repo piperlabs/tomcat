@@ -37,7 +37,7 @@ provision:
   - env: CATALINA_OPTS=
   - systempath: "{% catalinaHome %}/bin"
   - permission:
-      paths: "{% catalinaHome %}"
+      path: "{% catalinaHome %}"
       owner: "{% user %}"
       recursive: true
 
