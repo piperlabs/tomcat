@@ -35,6 +35,7 @@ provision:
   - url: http://archive.apache.org/dist/tomcat/tomcat-{% major %}/v{% major %}.{% minor %}.{% patch %}/bin/{% product %}.tar.gz
   - env: CATALINA_HOME={% catalinaHome %}
   - env: CATALINA_OPTS=
+  - env: CATALINA_PID=/home/{% user %}/catalina.pid
   - systempath: "{% catalinaHome %}/bin"
   - permission:
       path: "{% catalinaHome %}"
@@ -49,7 +50,7 @@ deploy:
         input: webapps
         topath: "{% catalinaHome %}/webapps"
 
-up: start-tomcat
+#up: start-tomcat
  
 down: stop-tomcat
 
