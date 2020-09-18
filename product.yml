@@ -50,7 +50,7 @@ deploy:
         input: webapps
         topath: "{% catalinaHome %}/webapps"
 
-#up: start-tomcat
+up: start-tomcat
  
 down: stop-tomcat
 
