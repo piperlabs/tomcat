@@ -57,6 +57,7 @@ command:
   start-tomcat:
     async: true
     inline: catalina.sh run
+    condition: curl -I "localhost:{% httpPort %}"
   stop-tomcat:
     container:
       create: false
