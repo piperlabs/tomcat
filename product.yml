@@ -28,6 +28,7 @@ var:
   httpPort: "8080"
   user: default
   jdk: "8"
+  timeout: "5"
 
 user: "{% user %}"
 
@@ -62,5 +63,5 @@ command:
   stop-tomcat:
     container:
       create: false
-    inline: catalina.sh stop
+    inline: catalina.sh stop {% timeout %} -force
    
