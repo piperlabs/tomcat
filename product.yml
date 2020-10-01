@@ -3,7 +3,7 @@ name: tomcat
 products:
   - name: aws-jdk
     alias: jdk
-    model:
+    var:
       version: "{% jdkVersion %}"
 
 ports:
@@ -31,11 +31,12 @@ var:
   timeout: "5"
 
 user: "{% user %}"
+envs:
+  - CATALINA_OPTS=
 
 provision:
   - url: http://archive.apache.org/dist/tomcat/tomcat-{% major %}/v{% major %}.{% minor %}.{% patch %}/bin/{% product %}.tar.gz
   - env: CATALINA_HOME={% catalinaHome %}
-  - env: CATALINA_OPTS=
   - env: CATALINA_PID=/home/{% user %}/catalina.pid
   - systempath: "{% catalinaHome %}/bin"
   - permission:
