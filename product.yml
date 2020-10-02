@@ -59,10 +59,10 @@ down: stop-tomcat
 command:
   start-tomcat:
     async: true
-    inline: catalina.sh start
+    script: start.sh
     condition: curl -I "localhost:{% httpPort %}"
   stop-tomcat:
     container:
       create: false
-    inline: catalina.sh stop {% timeout %} -force
+    script: stop.sh
    
