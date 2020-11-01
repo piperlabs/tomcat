@@ -1,7 +1,7 @@
-name: tomcat
+schema-version: 1.0
 
 products:
-  - name: aws-jdk
+  - origin: aws-jdk
     alias: jdk
     var:
       version: "{% jdkVersion %}"
