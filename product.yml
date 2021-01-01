@@ -17,14 +17,12 @@ persistent-dirs:
 
 
 const:
-  product: apache-tomcat-{% major %}.{% minor %}.{% patch %}
+  product: apache-tomcat-{% version %}
   catalinaHome: "{% installDir %}/{% product %}"
   webapps: "{% catalinaHome %}/webapps"
 
 var:
-  major: "8"
-  minor: "5"
-  patch: "53"
+  version: 8.5.53
   httpPort: "8080"
   user: default
   jdkVersion: "8"
@@ -36,7 +34,7 @@ envs:
 
 
 provision:
-  - url: http://archive.apache.org/dist/tomcat/tomcat-{% major %}/v{% major %}.{% minor %}.{% patch %}/bin/{% product %}.tar.gz
+  - url: http://archive.apache.org/dist/tomcat/tomcat-{{ majorVersion .product.version }}/v{% version %}/bin/{% product %}.tar.gz
   - env: CATALINA_HOME={% catalinaHome %}
   - env: CATALINA_PID=/home/{% user %}/catalina.pid
   - systempath: "{% catalinaHome %}/bin"
