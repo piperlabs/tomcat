@@ -48,16 +48,16 @@ deploy:
       from: "{{ .resources }}/webapps"
       topath: "{% catalinaHome %}/webapps"
 
-up: start-tomcat
+up: start
  
-down: stop-tomcat
+down: stop
 
 command:
-  start-tomcat:
+  start:
     async: true
     cmd: "{{ .templates }}/start.sh"
     condition: curl -I "localhost:{% httpPort %}"
-  stop-tomcat:
+  stop:
     container:
       create: false
     cmd: "{{ .templates }}/stop.sh"
